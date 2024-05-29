@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://bt32hp0claxbn"]
+
+[ext_resource type="PackedScene" uid="uid://cu2o7lkm2wqwk" path="res://smooth_operator.tscn" id="1_eyekq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qbvph"]
+
+[sub_resource type="Sky" id="Sky_rfwra"]
+sky_material = SubResource("ShaderMaterial_qbvph")
+
+[sub_resource type="Environment" id="Environment_4lpxy"]
+background_mode = 1
+background_color = Color(0.627451, 0.847059, 0.992157, 1)
+sky = SubResource("Sky_rfwra")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_bh17l"]
+size = Vector2(500, 500)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gd6jb"]
+albedo_color = Color(0.447059, 0.564706, 0.305882, 1)
+
+[node name="Main" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.74921, 0.620287, 0.232224, -4.65948e-16, -0.350616, 0.936519, 0.662332, -0.70165, -0.262685, 0, 12.0902, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_4lpxy")
+
+[node name="Ground" type="CSGMesh3D" parent="."]
+use_collision = true
+mesh = SubResource("PlaneMesh_bh17l")
+material = SubResource("StandardMaterial3D_gd6jb")
+
+[node name="SmoothOperator" parent="." instance=ExtResource("1_eyekq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.10406, 0.789819, 0.826778)

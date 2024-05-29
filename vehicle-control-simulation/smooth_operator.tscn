@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://cu2o7lkm2wqwk"]
+
+[ext_resource type="Script" path="res://smooth_operator.gd" id="1_rvb07"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rkt65"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_jatqa"]
+
+[node name="SmoothOperator" type="CharacterBody3D"]
+script = ExtResource("1_rvb07")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_rkt65")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_jatqa")
+
+[node name="Sensor" type="RayCast3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.955454, 0.295141, 0, -0.295141, 0.955454, 0, 1.51834, 3.98258)
+current = true
