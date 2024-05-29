@@ -2,11 +2,10 @@
 
 [ext_resource type="Script" path="res://smooth_operator.gd" id="1_rvb07"]
 [ext_resource type="PackedScene" uid="uid://c61jj1mspq6p1" path="res://car.tscn" id="2_3iusx"]
+[ext_resource type="Script" path="res://controller.gd" id="3_56syc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rkt65"]
 size = Vector3(1, 0.841911, 2.9348)
-
-[sub_resource type="BoxMesh" id="BoxMesh_jatqa"]
 
 [node name="SmoothOperator" type="CharacterBody3D"]
 script = ExtResource("1_rvb07")
@@ -15,17 +14,18 @@ script = ExtResource("1_rvb07")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20691, 0)
 shape = SubResource("BoxShape3D_rkt65")
 
-[node name="scene" parent="." instance=ExtResource("2_3iusx")]
+[node name="CarMesh" parent="." instance=ExtResource("2_3iusx")]
 transform = Transform3D(-8.98725, 0, -7.85691e-07, 0, 8.98725, 0, 7.85691e-07, 0, -8.98725, 0, -0.329616, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("BoxMesh_jatqa")
+[node name="Controller" type="Node" parent="."]
+script = ExtResource("3_56syc")
 
-[node name="Sensor" type="RayCast3D" parent="."]
+[node name="LidarSensor" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.250354, 0)
 target_position = Vector3(2.08165e-12, 2.08165e-12, -5)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.887663, 0.460494, 0, -0.460494, 0.887663, 0, 2.22702, 3.65749)
 current = true
+
+[connection signal="power_output" from="Controller" to="." method="_on_controller_power_output"]
