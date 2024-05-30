@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bathqmmrseky2"]
+
+[ext_resource type="Script" path="res://npc_car.gd" id="1_8w1mm"]
+[ext_resource type="PackedScene" uid="uid://dufk0dvjf15g2" path="res://yellow_car.tscn" id="2_que1p"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wfbla"]
+size = Vector3(1.32534, 1.27376, 3.88484)
+
+[node name="NPCCar" type="CharacterBody3D"]
+script = ExtResource("1_8w1mm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.224464, 0)
+shape = SubResource("BoxShape3D_wfbla")
+
+[node name="scene" parent="." instance=ExtResource("2_que1p")]
+transform = Transform3D(0.90031, 0, 0, 0, 0.90031, 0, 0, 0, 0.90031, 0, 0.261073, 0)

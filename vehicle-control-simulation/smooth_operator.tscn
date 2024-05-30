@@ -17,8 +17,9 @@ shape = SubResource("BoxShape3D_rkt65")
 [node name="CarMesh" parent="." instance=ExtResource("2_3iusx")]
 transform = Transform3D(-8.98725, 0, -7.85691e-07, 0, 8.98725, 0, 7.85691e-07, 0, -8.98725, 0, -0.329616, 0)
 
-[node name="Controller" type="Node" parent="."]
+[node name="Controller" type="Node3D" parent="." node_paths=PackedStringArray("lidar_sensor")]
 script = ExtResource("3_56syc")
+lidar_sensor = NodePath("../LidarSensor")
 
 [node name="LidarSensor" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.250354, 0)

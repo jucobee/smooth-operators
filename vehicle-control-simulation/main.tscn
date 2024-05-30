@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bt32hp0claxbn"]
+[gd_scene load_steps=8 format=3 uid="uid://bt32hp0claxbn"]
 
 [ext_resource type="PackedScene" uid="uid://cu2o7lkm2wqwk" path="res://smooth_operator.tscn" id="1_eyekq"]
+[ext_resource type="PackedScene" uid="uid://bathqmmrseky2" path="res://npc_car.tscn" id="2_a7ke8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qbvph"]
 
@@ -33,3 +34,6 @@ material = SubResource("StandardMaterial3D_gd6jb")
 
 [node name="SmoothOperator" parent="." instance=ExtResource("1_eyekq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.228869, 0)
+
+[node name="NPCCar" parent="." instance=ExtResource("2_a7ke8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.40533, -13.6267)
