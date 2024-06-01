@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://bt32hp0claxbn"]
+[gd_scene load_steps=10 format=3 uid="uid://bt32hp0claxbn"]
 
+[ext_resource type="Texture2D" uid="uid://bs8cg158aic7a" path="res://Sprite-0001.png" id="1_0bau3"]
 [ext_resource type="PackedScene" uid="uid://cu2o7lkm2wqwk" path="res://smooth_operator.tscn" id="1_eyekq"]
 [ext_resource type="PackedScene" uid="uid://bathqmmrseky2" path="res://npc_car.tscn" id="2_a7ke8"]
 
@@ -19,6 +20,13 @@ size = Vector2(500, 500)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gd6jb"]
 albedo_color = Color(0.447059, 0.564706, 0.305882, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bmsnj"]
+albedo_texture = ExtResource("1_0bau3")
+uv1_scale = Vector3(0.25, 0.25, 0.05)
+uv1_offset = Vector3(-0.55, 2.08165e-12, 2.08165e-12)
+uv1_triplanar = true
+texture_filter = 0
+
 [node name="Main" type="Node3D"]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -32,8 +40,14 @@ use_collision = true
 mesh = SubResource("PlaneMesh_bh17l")
 material = SubResource("StandardMaterial3D_gd6jb")
 
+[node name="Road" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00341749, -0.202946, 0.00011158)
+use_collision = true
+size = Vector3(7, 0.5, 500)
+material = SubResource("StandardMaterial3D_bmsnj")
+
 [node name="SmoothOperator" parent="." instance=ExtResource("1_eyekq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.228869, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.87745, 0.306239, 0)
 
 [node name="NPCCar" parent="." instance=ExtResource("2_a7ke8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.40533, -13.6267)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.496, 0.490653, -13.6267)

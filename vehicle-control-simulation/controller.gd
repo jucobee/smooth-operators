@@ -29,13 +29,13 @@ func get_sensor_data() -> float:
 		var distance = lidar_sensor.get_collision_point().z - self.global_position.z
 		return distance
 	else:
-		return INF
+		return 100
 
 # PID control loop
 func control(maintain_distance: float, delta_time):
 	var actual_distance = get_sensor_data()
 	
-	if actual_distance != INF:
+	if actual_distance != 100:
 		error = maintain_distance - actual_distance
 		integral += error * delta_time
 		derivative = (error - prev_error) / delta_time
@@ -45,7 +45,7 @@ func control(maintain_distance: float, delta_time):
 		
 		# convert distance error to speed
 		
-		power_output.emit()
+#		power_output.emit()
 
 func _physics_process(delta):
 	if current_time >= control_timeout:

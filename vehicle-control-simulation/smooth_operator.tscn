@@ -23,7 +23,7 @@ lidar_sensor = NodePath("../LidarSensor")
 
 [node name="LidarSensor" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.250354, 0)
-target_position = Vector3(2.08165e-12, 2.08165e-12, -5)
+target_position = Vector3(2.08165e-12, 2.08165e-12, -10)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.887663, 0.460494, 0, -0.460494, 0.887663, 0, 2.22702, 3.65749)
