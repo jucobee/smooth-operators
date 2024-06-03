@@ -50,4 +50,4 @@ material = SubResource("StandardMaterial3D_bmsnj")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.87745, 0.306239, 0)
 
 [node name="NPCCar" parent="." instance=ExtResource("2_a7ke8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.83061, 0.490653, -101.701)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.56685, 0.490653, -101.701)
