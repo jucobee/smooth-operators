@@ -10,12 +10,14 @@ extends CharacterBody3D
 
 # Velocity Approximation Algorithm
 ## do this to avoid dealing with finding velocity from power equations
-var tolerance: float = 0.1
+var tolerance: float = 0.01
 var max_iterations: int = 100
-var acceleration: float = 0.0
-var prev_velocity: float = 0.0
+var acceleration: float
+var speed: float
+var prev_speed: float
+var power: float
 
-func calculate_velocity(power: float, v_old: float, delta: float) -> float:
+func calculate_speed(power: float, v_old: float) -> float:
 	var error = 1.0
 	var iteration = 0
 	var v = v_old  # Start with the previous velocity
@@ -40,16 +42,22 @@ func calculate_velocity(power: float, v_old: float, delta: float) -> float:
 		if error <= tolerance:
 			break
 	
-	acceleration = (v - v_old) / delta
 	return v
 
 func _ready():
-	prev_velocity = 25.0
+	speed = 25.0
+	prev_speed = 25.0
+	acceleration = 0.0
 
 func _physics_process(delta):
-	velocity = Vector3.FORWARD * calculate_velocity(10000, prev_velocity, delta)
-	prev_velocity = -velocity.z
+	velocity = Vector3.FORWARD * speed
+	acceleration = (speed - prev_speed) / delta
+	
 	velocity.y -= gravity * delta
 	
 	move_and_slide()
 
+
+func _on_controller_power_output(power):
+	prev_speed = speed
+	speed = calculate_speed(power, prev_speed)
