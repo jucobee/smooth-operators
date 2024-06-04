@@ -47,7 +47,7 @@ size = Vector3(7, 0.5, 500)
 material = SubResource("StandardMaterial3D_bmsnj")
 
 [node name="SmoothOperator" parent="." instance=ExtResource("1_eyekq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.87745, 0.306239, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.72381, 0.306239, 242.318)
 
 [node name="NPCCar" parent="." instance=ExtResource("2_a7ke8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.56685, 0.490653, -101.701)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.18769, 0.490653, 202.145)
