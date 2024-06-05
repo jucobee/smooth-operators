@@ -14,6 +14,8 @@ var max_iterations: int = 100
 var speed: float = 0.0
 var power: float = 0.0
 
+@onready var display = get_node("../Display/DisplayControl")
+
 # Velocity from Power Input Approximation Algorithm
 # Newton's Method: v1 = v0 - (F(v) / F'(v))
 func calculate_speed(power: float, v_old: float, delta: float) -> float:
@@ -47,6 +49,9 @@ func _physics_process(delta):
 	velocity = Vector3.FORWARD * speed
 	
 	velocity.y -= gravity * delta
+	
+	display.update_speed(speed)
+	display.update_power(power)
 	
 	move_and_slide()
 

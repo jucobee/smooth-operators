@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bt32hp0claxbn"]
+[gd_scene load_steps=12 format=3 uid="uid://bt32hp0claxbn"]
 
 [ext_resource type="Texture2D" uid="uid://bs8cg158aic7a" path="res://Sprite-0001.png" id="1_0bau3"]
 [ext_resource type="PackedScene" uid="uid://cu2o7lkm2wqwk" path="res://smooth_operator.tscn" id="1_eyekq"]
 [ext_resource type="PackedScene" uid="uid://bathqmmrseky2" path="res://npc_car.tscn" id="2_a7ke8"]
+[ext_resource type="Script" path="res://DisplayControl.gd" id="4_b3h3a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qbvph"]
 
@@ -26,6 +27,9 @@ uv1_scale = Vector3(0.25, 0.25, 0.05)
 uv1_offset = Vector3(-0.55, 2.08165e-12, 2.08165e-12)
 uv1_triplanar = true
 texture_filter = 0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lofal"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="Main" type="Node3D"]
 
@@ -51,3 +55,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.72381, 0.306239, 242.318)
 
 [node name="NPCCar" parent="." instance=ExtResource("2_a7ke8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.18769, 0.490653, 202.145)
+
+[node name="Display" type="CanvasLayer" parent="."]
+
+[node name="DisplayControl" type="Control" parent="Display"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_b3h3a")
+
+[node name="Panel" type="Panel" parent="Display/DisplayControl"]
+use_parent_material = true
+layout_mode = 0
+offset_left = -70.0
+offset_right = 11266.0
+offset_bottom = 4242.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_lofal")
+
+[node name="Speed" type="Label" parent="Display/DisplayControl/Panel"]
+layout_mode = 0
+offset_left = 898.0
+offset_top = 190.0
+offset_right = 1424.0
+offset_bottom = 502.0
+
+[node name="Power" type="Label" parent="Display/DisplayControl/Panel"]
+layout_mode = 0
+offset_left = 888.0
+offset_top = 220.0
+offset_right = 1414.0
+offset_bottom = 532.0
