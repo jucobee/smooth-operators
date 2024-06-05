@@ -50,8 +50,8 @@ func _physics_process(delta):
 	
 	velocity.y -= gravity * delta
 	
-	display.update_speed(speed)
-	display.update_power(power)
+	display.update_speed(speed * 2.23694)
+	display.update_power(power / 1000)
 	
 	move_and_slide()
 

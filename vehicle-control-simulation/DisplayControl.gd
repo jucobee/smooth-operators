@@ -13,7 +13,7 @@ func _process(delta):
 	pass
 	
 func update_speed(speed):
-	speed_label.text = "Speed: %d m/s" % speed
+	speed_label.text = "Speed: %d MPH" % speed
 
 func update_power(power):
-	power_label.text = "Power: %d N-m" % power
+	power_label.text = "Power: %d kW" % power
