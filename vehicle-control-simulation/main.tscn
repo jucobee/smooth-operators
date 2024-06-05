@@ -90,4 +90,8 @@ label_settings = ExtResource("5_vpr3l")
 layout_mode = 2
 label_settings = ExtResource("5_vpr3l")
 
+[node name="Distance" type="Label" parent="Display/DisplayControl/GridContainer"]
+layout_mode = 2
+label_settings = ExtResource("5_vpr3l")
+
 [connection signal="body_entered" from="Ground/Area3D" to="Ground" method="_on_area_3d_body_entered"]

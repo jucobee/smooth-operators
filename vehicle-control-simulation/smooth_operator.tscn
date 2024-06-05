@@ -7,8 +7,10 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_rkt65"]
 size = Vector3(1, 0.841911, 2.9348)
 
-[node name="SmoothOperator" type="CharacterBody3D"]
+[node name="SmoothOperator" type="CharacterBody3D" node_paths=PackedStringArray("camera1", "camera2")]
 script = ExtResource("1_rvb07")
+camera1 = NodePath("Camera3D")
+camera2 = NodePath("TopDownCam")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.20691, 0)
@@ -21,10 +23,11 @@ transform = Transform3D(-8.98725, 0, -7.85691e-07, 0, 8.98725, 0, 7.85691e-07, 0
 script = ExtResource("3_56syc")
 lidar_sensor = NodePath("../LidarSensor")
 speedometer = NodePath("..")
+Kd = 0.1
 
 [node name="LidarSensor" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.250354, -1.46479)
-target_position = Vector3(2.08165e-12, 2.08165e-12, -90)
+target_position = Vector3(2.08165e-12, 2.08165e-12, -80)
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.9752, 0.221327, 0, -0.221327, 0.9752, 0, 1.64115, 3.96142)
@@ -32,9 +35,9 @@ current = true
 fov = 43.6
 
 [node name="TopDownCam" type="Camera3D" parent="."]
-transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, -1.5246e-23, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 0, 12.9983, -18.5184)
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, -1.5246e-23, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 0, 12.9983, -27.7695)
 projection = 1
 fov = 43.6
-size = 24.6012
+size = 40.0036
 
 [connection signal="power_output" from="Controller" to="." method="_on_controller_power_output"]

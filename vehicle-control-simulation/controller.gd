@@ -9,6 +9,7 @@ var control_timeout: float
 @export var cruise_60mph_percent = 0.0981
 @export var max_power = 101370.752
 var cruise_60mph_power: float
+var prev_distance: float = 0.0
 
 # PID parameters
 var error: float
@@ -38,17 +39,19 @@ func get_sensor_data() -> float:
 # PID control loop
 func control(current_speed: float, delta_time: float):
 	var actual_distance = get_sensor_data()
-	print("Distance to car: ", actual_distance)
 	var target_speed: float
+	var maintain_distance: float
 	
-	# calculate target speed based on 2 second rule
-	var maintain_distance = current_speed * 1.0
-	print("Distance to maintain: ", maintain_distance)
-	if actual_distance < maintain_distance:
-		target_speed = actual_distance / 1.0
-		target_speed = clamp(target_speed, 0.0, cruise_speed)
+	if actual_distance < prev_distance and prev_distance < INF:
+		# calculate target speed based on 3 second rule
+		var maintain_speed = current_speed - (prev_distance - actual_distance) / delta_time
+		maintain_distance = maintain_speed * 3.0 # 3 second rule
+		var acceleration = (maintain_speed**2 - current_speed**2) / maintain_distance
+		target_speed = move_toward(target_speed, maintain_speed, abs(acceleration) * delta_time)
 	else:
 		target_speed = cruise_speed
+	
+	target_speed = clamp(target_speed, 0.0, cruise_speed)
 	
 	error = target_speed - current_speed
 	integral += error * delta_time
@@ -62,6 +65,9 @@ func control(current_speed: float, delta_time: float):
 	var total_power = cruise_power + inertial_power
 	total_power = min(max(total_power, -max_power), max_power)
 	power_output.emit(total_power)
+	
+	prev_distance = actual_distance
+	speedometer.distance = actual_distance
 
 func _physics_process(delta):
 	if current_time >= control_timeout:

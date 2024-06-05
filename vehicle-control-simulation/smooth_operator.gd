@@ -13,8 +13,12 @@ var tolerance: float = 0.01
 var max_iterations: int = 100
 var speed: float = 0.0
 var power: float = 0.0
+var distance: float = 0.0
 
 @onready var display = get_node("../Display/DisplayControl")
+
+@export var camera1: Camera3D
+@export var camera2: Camera3D
 
 # Velocity from Power Input Approximation Algorithm
 # Newton's Method: v1 = v0 - (F(v) / F'(v))
@@ -52,8 +56,16 @@ func _physics_process(delta):
 	
 	display.update_speed(speed * 2.23694)
 	display.update_power(power / 1000)
+	display.update_distance(distance * 3.280839895)
 	
 	move_and_slide()
+	
+	if Input.is_physical_key_pressed(KEY_1):
+		camera2.current = false
+		camera1.current = true
+	elif Input.is_physical_key_pressed(KEY_2):
+		camera1.current = false
+		camera2.current = true
 
 
 func _on_controller_power_output(power):
