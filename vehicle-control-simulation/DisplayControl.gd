@@ -1,7 +1,7 @@
 extends Control
 
-@onready var speed_label = get_node("Panel/Speed")
-@onready var power_label = get_node("Panel/Power")
+@onready var speed_label = $GridContainer/Speed
+@onready var power_label = $GridContainer/Power
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

@@ -42,10 +42,10 @@ func control(current_speed: float, delta_time: float):
 	var target_speed: float
 	
 	# calculate target speed based on 2 second rule
-	var maintain_distance = current_speed * 2.0
+	var maintain_distance = current_speed * 1.0
 	print("Distance to maintain: ", maintain_distance)
 	if actual_distance < maintain_distance:
-		target_speed = actual_distance / 2.0
+		target_speed = actual_distance / 1.0
 		target_speed = clamp(target_speed, 0.0, cruise_speed)
 	else:
 		target_speed = cruise_speed
