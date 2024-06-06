@@ -7,13 +7,16 @@ extends CharacterBody3D
 @export var Cd: float = 0.27  # Drag coefficient
 @export var Cr: float = 0.0075  # Rolling resistance coefficient
 @export var mass: float = 1474.0  # Vehicle mass (kg)
+@export var max_power: float = 101370.752 # Maximum power output of engine (W)
+@export var zero_60: float = 5.8 # Time required to go from 0-60mph
 @export var gravity: float = 9.81  # Gravity (m/s^2)
+
+@export var controller: Controller
 
 # Variables updated as simulator runs
 var speed: float = 0.0 # current speed in m/s
 var power: float = 0.0 # current power in Watts
-
-# Current distance to car in front, updated from the controller script
+# Current distance to car in front
 # Only used in this script to display on the HUD
 var distance: float = 0.0 
 
@@ -23,6 +26,17 @@ var distance: float = 0.0
 # Two different POV's to switch between
 @export var camera1: Camera3D # Behind view
 @export var camera2: Camera3D # Bird's eye view
+
+# _ready() function called before simulator starts
+func _ready():
+	# Initialize controller variables
+	controller.mass = self.mass
+	controller.max_power = self.max_power
+	
+	var v = 60 / 2.23694 # convert to m/s
+	var P_aero = 0.5 * rho * frontal_area * Cd * v**3
+	var P_rr = Cr * mass * gravity * v
+	controller.cruise_60mph_power = P_aero + P_rr
 
 # Find velocity from power input using approximation algorithm
 # Newton's Method: v1 = v0 - (F(v) / F'(v))
@@ -60,8 +74,9 @@ func calculate_speed(power: float, v_old: float, delta: float) -> float:
 
 
 # PID Controller updates how much power for the engine to output
-func _on_controller_power_output(power):
+func _on_controller_power_output(power, distance):
 	self.power = power
+	self.distance = distance
 
 
 # Called every physics frame (60 fps)
@@ -77,6 +92,9 @@ func _physics_process(delta):
 	
 	# CharacterController3D function to actually move the object
 	move_and_slide()
+	
+	# Tell controller current speed (Speedometer)
+	controller.actual_speed = speed
 	
 	# Update HUD
 	display.update_speed(speed * 2.23694)

@@ -7,8 +7,9 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_rkt65"]
 size = Vector3(1, 0.841911, 2.9348)
 
-[node name="SmoothOperator" type="CharacterBody3D" node_paths=PackedStringArray("camera1", "camera2")]
+[node name="SmoothOperator" type="CharacterBody3D" node_paths=PackedStringArray("controller", "camera1", "camera2")]
 script = ExtResource("1_rvb07")
+controller = NodePath("Controller")
 camera1 = NodePath("Camera3D")
 camera2 = NodePath("TopDownCam")
 
@@ -19,10 +20,9 @@ shape = SubResource("BoxShape3D_rkt65")
 [node name="CarMesh" parent="." instance=ExtResource("2_3iusx")]
 transform = Transform3D(-8.98725, 0, -7.85691e-07, 0, 8.98725, 0, 7.85691e-07, 0, -8.98725, 0, -0.329616, 0)
 
-[node name="Controller" type="Node3D" parent="." node_paths=PackedStringArray("lidar_sensor", "speedometer")]
+[node name="Controller" type="Node3D" parent="." node_paths=PackedStringArray("lidar_sensor")]
 script = ExtResource("3_56syc")
 lidar_sensor = NodePath("../LidarSensor")
-speedometer = NodePath("..")
 Kd = 0.1
 
 [node name="LidarSensor" type="RayCast3D" parent="."]
